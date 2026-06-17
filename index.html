@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Lena!</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sky-top: #4AABF0;
+    --sky-mid: #7EC8E3;
+    --sky-light: #B5E2FA;
+    --sunshine: #FFD166;
+    --warm-orange: #F4845F;
+    --blush: #F2A6B3;
+    --grass: #6BCB77;
+    --grass-dark: #4AA35A;
+    --mint: #95D5B2;
+    --cream: #FFFDF7;
+    --soft-white: #FAF3EB;
+    --paw-pink: #F4A0B0;
+    --deep-sky: #2B7EC1;
+    --cloud-white: rgba(255,255,255,0.85);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 35%, var(--sky-light) 60%, var(--grass) 85%, var(--grass-dark) 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Sun */
+  .sun {
+    position: fixed;
+    top: 4%;
+    right: 10%;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle at 50% 50%, #FFF7B0, #FFD166, #F4A42A);
+    border-radius: 50%;
+    box-shadow: 0 0 60px rgba(255,209,102,0.7), 0 0 120px rgba(255,209,102,0.35), 0 0 200px rgba(255,209,102,0.15);
+    z-index: 1;
+    animation: pulse-sun 4s ease-in-out infinite;
+  }
+  .sun::before {
+    content: '';
+    position: absolute;
+    top: -15px; left: -15px; right: -15px; bottom: -15px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,247,176,0.3), transparent 70%);
+    animation: sun-rays 3s ease-in-out infinite alternate;
+  }
+  @keyframes pulse-sun {
+    0%, 100% { box-shadow: 0 0 60px rgba(255,209,102,0.7), 0 0 120px rgba(255,209,102,0.35); }
+    50% { box-shadow: 0 0 80px rgba(255,209,102,0.9), 0 0 160px rgba(255,209,102,0.45); }
+  }
+  @keyframes sun-rays {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.15); opacity: 0.4; }
+  }
+
+  /* Clouds */
+  .cloud {
+    position: fixed;
+    background: var(--cloud-white);
+    border-radius: 50px;
+    z-index: 0;
+  }
+  .cloud::before, .cloud::after {
+    content: '';
+    position: absolute;
+    background: inherit;
+    border-radius: 50%;
+  }
+  .cloud-1 {
+    width: 140px; height: 45px; top: 8%; left: -180px;
+    animation: drift 30s linear infinite;
+  }
+  .cloud-1::before { width: 60px; height: 60px; top: -30px; left: 25px; }
+  .cloud-1::after { width: 80px; height: 65px; top: -35px; left: 55px; }
+  .cloud-2 {
+    width: 100px; height: 35px; top: 15%; left: -130px;
+    animation: drift 38s linear infinite 6s;
+    opacity: 0.7;
+  }
+  .cloud-2::before { width: 45px; height: 45px; top: -22px; left: 18px; }
+  .cloud-2::after { width: 60px; height: 50px; top: -28px; left: 40px; }
+  .cloud-3 {
+    width: 120px; height: 40px; top: 22%; left: -150px;
+    animation: drift 25s linear infinite 14s;
+    opacity: 0.6;
+  }
+  .cloud-3::before { width: 50px; height: 50px; top: -25px; left: 20px; }
+  .cloud-3::after { width: 65px; height: 55px; top: -30px; left: 48px; }
+
+  @keyframes drift {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(100vw + 350px)); }
+  }
+
+  /* Grass hill at bottom */
+  .grass-hill {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 18%;
+    background: linear-gradient(180deg, transparent 0%, rgba(76,170,90,0.4) 30%, rgba(58,140,72,0.6) 100%);
+    z-index: 0;
+  }
+
+  /* Floating paw prints */
+  .paw {
+    position: fixed;
+    opacity: 0.12;
+    z-index: 0;
+    animation: float-paw linear infinite;
+  }
+  @keyframes float-paw {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.12; }
+    90% { opacity: 0.08; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* Butterflies */
+  .butterfly {
+    position: fixed;
+    font-size: 1.2rem;
+    z-index: 1;
+    animation: flutter linear infinite;
+    opacity: 0.7;
+  }
+  @keyframes flutter {
+    0% { transform: translateX(0) translateY(0); }
+    25% { transform: translateX(40px) translateY(-20px); }
+    50% { transform: translateX(80px) translateY(5px); }
+    75% { transform: translateX(120px) translateY(-15px); }
+    100% { transform: translateX(160px) translateY(0); }
+  }
+
+  /* Running scene at bottom */
+  .running-scene {
+    position: fixed;
+    bottom: 30px;
+    left: -250px;
+    z-index: 1;
+    font-size: 2rem;
+    animation: run-across 16s linear infinite;
+    white-space: nowrap;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+  }
+  @keyframes run-across {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(100vw + 500px)); }
+  }
+
+  /* Main content */
+  .container {
+    position: relative;
+    z-index: 2;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+  }
+
+  /* Header card */
+  .header-card {
+    background: rgba(255,253,247,0.93);
+    backdrop-filter: blur(12px);
+    border-radius: 28px;
+    padding: 44px 32px 36px;
+    text-align: center;
+    box-shadow: 0 12px 50px rgba(0,0,0,0.1), 0 0 0 1px rgba(255,255,255,0.5);
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--blush), var(--warm-orange), var(--sunshine), var(--grass), var(--sky-top), var(--blush));
+  }
+
+  .cozy-scene {
+    font-size: 2.8rem;
+    margin-bottom: 16px;
+    letter-spacing: 4px;
+    line-height: 1.5;
+  }
+
+  .occasion-label {
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--deep-sky);
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-family: 'Caveat', cursive;
+    font-size: 3.4rem;
+    background: linear-gradient(135deg, var(--warm-orange), var(--blush), #E85D75);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+
+  .subtitle {
+    font-family: 'Caveat', cursive;
+    font-size: 1.6rem;
+    color: var(--deep-sky);
+    margin-bottom: 18px;
+  }
+
+  .tagline {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.7;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  .vibe-tags {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  .vibe-tag {
+    background: linear-gradient(135deg, rgba(74,171,240,0.1), rgba(149,213,178,0.12));
+    border: 1px solid rgba(74,171,240,0.2);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #4A7C9B;
+    letter-spacing: 0.5px;
+  }
+  .vibe-tag span { margin-right: 4px; }
+
+  /* Form card */
+  .form-card {
+    background: rgba(255,253,247,0.90);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    padding: 32px 28px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08), 0 0 0 1px rgba(255,255,255,0.4);
+    margin-bottom: 28px;
+  }
+
+  .form-title {
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 22px;
+    text-align: center;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+  .form-group label {
+    display: block;
+    font-weight: 800;
+    font-size: 0.82rem;
+    color: var(--deep-sky);
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 13px 16px;
+    border: 2px solid #D4E8F0;
+    border-radius: 14px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    color: #333;
+    background: rgba(255,255,255,0.8);
+    transition: border-color 0.25s, box-shadow 0.25s;
+    outline: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--sky-top);
+    box-shadow: 0 0 0 3px rgba(74,171,240,0.15);
+  }
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .submit-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--warm-orange), var(--blush));
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1.05rem;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 8px;
+  }
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(244,132,95,0.35);
+  }
+  .submit-btn:active { transform: translateY(0); }
+  .submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 16px;
+    background: linear-gradient(135deg, #D4EDDA, #C3E6CB);
+    border-radius: 12px;
+    color: #155724;
+    font-weight: 700;
+    margin-top: 12px;
+    animation: pop-in 0.4s ease;
+  }
+  .success-msg.show { display: block; }
+
+  .error-msg {
+    display: none;
+    text-align: center;
+    padding: 16px;
+    background: linear-gradient(135deg, #F8D7DA, #F5C6CB);
+    border-radius: 12px;
+    color: #721C24;
+    font-weight: 700;
+    margin-top: 12px;
+    animation: pop-in 0.4s ease;
+  }
+  .error-msg.show { display: block; }
+
+  @keyframes pop-in {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  /* Messages section */
+  .messages-section { margin-top: 8px; }
+  .messages-title {
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem;
+    color: var(--cream);
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .messages-count {
+    text-align: center;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+
+  .message-card {
+    background: rgba(255,253,247,0.90);
+    backdrop-filter: blur(8px);
+    border-radius: 18px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    border-left: 4px solid;
+    animation: slide-up 0.4s ease;
+  }
+  .message-card:nth-child(5n+1) { border-left-color: var(--blush); }
+  .message-card:nth-child(5n+2) { border-left-color: var(--warm-orange); }
+  .message-card:nth-child(5n+3) { border-left-color: var(--grass); }
+  .message-card:nth-child(5n+4) { border-left-color: var(--sky-top); }
+  .message-card:nth-child(5n)   { border-left-color: var(--sunshine); }
+
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .message-author {
+    font-weight: 800;
+    color: #333;
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+  }
+  .message-text {
+    color: #555;
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+
+  .no-messages {
+    text-align: center;
+    color: rgba(255,255,255,0.75);
+    font-style: italic;
+    padding: 30px;
+    font-size: 1rem;
+  }
+
+  .loading-spinner {
+    text-align: center;
+    color: rgba(255,255,255,0.85);
+    padding: 20px;
+    font-size: 0.95rem;
+  }
+  .loading-spinner::after {
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .footer-note {
+    text-align: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.75rem;
+    margin-top: 40px;
+    padding-bottom: 20px;
+  }
+
+  @media (max-width: 500px) {
+    h1 { font-size: 2.6rem; }
+    .subtitle { font-size: 1.3rem; }
+    .header-card { padding: 32px 20px 28px; }
+    .form-card { padding: 24px 20px; }
+    .cozy-scene { font-size: 2.2rem; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="sun"></div>
+  <div class="cloud cloud-1"></div>
+  <div class="cloud cloud-2"></div>
+  <div class="cloud cloud-3"></div>
+  <div class="grass-hill"></div>
+
+  <div class="paw" style="left:8%; font-size:1rem; animation-duration:22s; animation-delay:0s;">🐾</div>
+  <div class="paw" style="left:25%; font-size:1.4rem; animation-duration:28s; animation-delay:4s;">🐾</div>
+  <div class="paw" style="left:50%; font-size:0.9rem; animation-duration:20s; animation-delay:8s;">🐾</div>
+  <div class="paw" style="left:72%; font-size:1.2rem; animation-duration:25s; animation-delay:2s;">🐾</div>
+  <div class="paw" style="left:90%; font-size:1rem; animation-duration:30s; animation-delay:6s;">🐾</div>
+
+  <div class="butterfly" style="top:18%; left:5%; animation-duration:8s; animation-delay:0s;">🦋</div>
+  <div class="butterfly" style="top:30%; left:70%; animation-duration:10s; animation-delay:3s;">🦋</div>
+
+  <div class="running-scene">🏃‍♀️💨 🐕 🐈‍⬛</div>
+
+  <div class="container">
+    <div class="header-card">
+      <div class="cozy-scene">🐱 ☀️ 📺 🐶 🏃‍♀️</div>
+      <div class="occasion-label">From All of Us at MGBHP</div>
+      <h1>Happy Birthday, Lena!</h1>
+      <div class="subtitle">Sunshine &amp; Good Vibes</div>
+      <p class="tagline">
+        Wishing you the best birthday ever, complete with purring cats, happy pups, your favorite shows, and a perfect run under blue skies. Drop a message below!
+      </p>
+      <div class="vibe-tags">
+        <div class="vibe-tag"><span>🐱</span> Cat Mom</div>
+        <div class="vibe-tag"><span>🐶</span> Dog Mom</div>
+        <div class="vibe-tag"><span>📺</span> Remote Hog</div>
+        <div class="vibe-tag"><span>🏃‍♀️</span> Runner's High</div>
+        <div class="vibe-tag"><span>😎</span> Chief Vibes Officer</div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <div class="form-title">Leave a Birthday Wish for Lena 🎉</div>
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" id="nameInput" placeholder="e.g. Rick from ERAD">
+      </div>
+      <div class="form-group">
+        <label>Your Message for Lena</label>
+        <textarea id="messageInput" placeholder="Write something warm, funny, or heartfelt..."></textarea>
+      </div>
+      <button class="submit-btn" id="submitBtn" onclick="submitMessage()">Send Birthday Wishes 🐾</button>
+      <div class="success-msg" id="successMsg">Your message has been added to Lena's card! 🎉🐱</div>
+      <div class="error-msg" id="errorMsg">Something went wrong. Please try again!</div>
+    </div>
+
+    <div class="messages-section">
+      <div class="messages-title">Birthday Messages 🎂</div>
+      <div class="messages-count" id="messagesCount"></div>
+      <div id="messagesWall">
+        <div class="loading-spinner" id="loadingSpinner">Loading birthday wishes</div>
+        <div class="no-messages" id="noMessages" style="display:none;">Be the first to leave a birthday wish for Lena!</div>
+      </div>
+    </div>
+
+    <div class="footer-note">Made with 🐾 and ☀️ for Lena's Birthday</div>
+  </div>
+
+<script>
+  // ============================================================
+  // Paste your Google Apps Script web app URL below
+  // (same one you used for Kevin's card, or a new one)
+  // ============================================================
+  var WEBAPP_URL = 'YOUR_WEBAPP_URL_HERE';
+  // ============================================================
+
+  function escapeHTML(str) {
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function handleMessages(messages) {
+    var wall = document.getElementById('messagesWall');
+    var noMsg = document.getElementById('noMessages');
+    var countEl = document.getElementById('messagesCount');
+    var spinner = document.getElementById('loadingSpinner');
+
+    spinner.style.display = 'none';
+
+    if (!messages || messages.length === 0) {
+      noMsg.style.display = 'block';
+      countEl.textContent = '';
+      return;
+    }
+
+    noMsg.style.display = 'none';
+    countEl.textContent = messages.length + (messages.length === 1 ? ' wish' : ' wishes') + ' so far!';
+
+    var existingCards = wall.querySelectorAll('.message-card');
+    existingCards.forEach(function(c) { c.remove(); });
+
+    var reversed = messages.slice().reverse();
+    reversed.forEach(function(msg) {
+      var card = document.createElement('div');
+      card.className = 'message-card';
+      card.innerHTML =
+        '<div class="message-author">' + escapeHTML(msg.name) + '</div>' +
+        '<div class="message-text">' + escapeHTML(msg.message) + '</div>';
+      wall.appendChild(card);
+    });
+  }
+
+  function loadMessages() {
+    if (WEBAPP_URL === 'YOUR_WEBAPP_URL_HERE') {
+      document.getElementById('loadingSpinner').style.display = 'none';
+      document.getElementById('noMessages').style.display = 'block';
+      return;
+    }
+
+    var old = document.getElementById('jsonpScript');
+    if (old) old.remove();
+
+    var script = document.createElement('script');
+    script.id = 'jsonpScript';
+    script.src = WEBAPP_URL + '?callback=handleMessages&_=' + Date.now();
+    script.onerror = function() {
+      document.getElementById('loadingSpinner').style.display = 'none';
+      document.getElementById('noMessages').style.display = 'block';
+      document.getElementById('noMessages').textContent = 'Could not load messages. Please refresh to try again.';
+    };
+    document.body.appendChild(script);
+  }
+
+  function submitMessage() {
+    var nameInput = document.getElementById('nameInput');
+    var messageInput = document.getElementById('messageInput');
+    var submitBtn = document.getElementById('submitBtn');
+    var successMsg = document.getElementById('successMsg');
+    var errorMsg = document.getElementById('errorMsg');
+
+    var name = nameInput.value.trim();
+    var message = messageInput.value.trim();
+
+    if (!name || !message) {
+      alert('Please fill in both your name and a message!');
+      return;
+    }
+
+    if (WEBAPP_URL === 'YOUR_WEBAPP_URL_HERE') {
+      alert('Paste your Google Apps Script URL into the HTML file first.');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+    successMsg.classList.remove('show');
+    errorMsg.classList.remove('show');
+
+    var iframeName = 'submitFrame_' + Date.now();
+    var iframe = document.createElement('iframe');
+    iframe.name = iframeName;
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    var form = document.createElement('form');
+    form.method = 'POST';
+    form.action = WEBAPP_URL;
+    form.target = iframeName;
+    form.style.display = 'none';
+
+    var nameField = document.createElement('input');
+    nameField.name = 'name';
+    nameField.value = name;
+    form.appendChild(nameField);
+
+    var msgField = document.createElement('input');
+    msgField.name = 'message';
+    msgField.value = message;
+    form.appendChild(msgField);
+
+    document.body.appendChild(form);
+    form.submit();
+
+    nameInput.value = '';
+    messageInput.value = '';
+    successMsg.classList.add('show');
+    setTimeout(function() { successMsg.classList.remove('show'); }, 3500);
+
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Send Birthday Wishes 🐾';
+
+    setTimeout(function() {
+      iframe.remove();
+      form.remove();
+      loadMessages();
+    }, 2000);
+  }
+
+  loadMessages();
+  setInterval(loadMessages, 30000);
+</script>
+
+</body>
+</html>
