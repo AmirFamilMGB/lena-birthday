@@ -522,7 +522,7 @@
   // Paste your Google Apps Script web app URL below
   // (same one you used for Kevin's card, or a new one)
   // ============================================================
-  var WEBAPP_URL = 'YOUR_WEBAPP_URL_HERE';
+  var WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbyY4GCjek4yhj8cqHI2kvoHtmNY-H2vOZsQxAMbWyWWMTfNTpZJ3sBjLAjxAFPO85YV3g/exec';
   // ============================================================
 
   function escapeHTML(str) {
@@ -563,7 +563,7 @@
   }
 
   function loadMessages() {
-    if (WEBAPP_URL === 'YOUR_WEBAPP_URL_HERE') {
+    if (WEBAPP_URL === 'https://script.google.com/macros/s/AKfycbyY4GCjek4yhj8cqHI2kvoHtmNY-H2vOZsQxAMbWyWWMTfNTpZJ3sBjLAjxAFPO85YV3g/exec') {
       document.getElementById('loadingSpinner').style.display = 'none';
       document.getElementById('noMessages').style.display = 'block';
       return;
@@ -598,7 +598,7 @@
       return;
     }
 
-    if (WEBAPP_URL === 'YOUR_WEBAPP_URL_HERE') {
+    if (WEBAPP_URL === 'https://script.google.com/macros/s/AKfycbyY4GCjek4yhj8cqHI2kvoHtmNY-H2vOZsQxAMbWyWWMTfNTpZJ3sBjLAjxAFPO85YV3g/exec') {
       alert('Paste your Google Apps Script URL into the HTML file first.');
       return;
     }
